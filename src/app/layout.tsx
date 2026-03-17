@@ -4,7 +4,6 @@ import './globals.css'
 import { LocaleProvider } from '@/lib/locale-context'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { BackgroundFX } from '@/components/ui/BackgroundFX'
-import { NoiseCanvas } from '@/components/ui/NoiseCanvas'
 
 const geist = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,8 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LocaleProvider>
           {/* Background layer — sits below all content */}
           <BackgroundFX />
-          {/* Noise overlay — above everything, overlay blend hits text too */}
-          <NoiseCanvas />
           {/* Content layer — explicitly above background */}
           <div style={{ position: 'relative', zIndex: 1 }}>
             <LanguageSwitcher />

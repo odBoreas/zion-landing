@@ -134,11 +134,13 @@
   }
   .glitch::before {
     color: #00E5FF;
+    -webkit-text-fill-color: #00E5FF;
     animation: glitch-before 3.1s steps(1) infinite;
     clip-path: inset(50% 0 50% 0);
   }
   .glitch::after {
     color: #FF00FF;
+    -webkit-text-fill-color: #FF00FF;
     animation: glitch-after 2.9s steps(1) infinite;
     clip-path: inset(50% 0 50% 0);
   }
@@ -182,22 +184,18 @@
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
   }
 
-  /* ─── NOISE ON TEXT ──────────────────────────────────────── */
-  /* Wrap any element — ::after grain overlays directly on the characters */
-  .noise-text {
-    position: relative;
-    display: inline-block;
-  }
-  .noise-text::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    pointer-events: none;
-    border-radius: inherit;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-    mix-blend-mode: overlay;
-    opacity: 0.28;
+  /* ─── NOISE CLIPPED TO TEXT ──────────────────────────────── */
+  /* Noise + radial gradient as background, clipped to text glyph shapes */
+  .noise-clip-text {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse 90% 70% at 50% 30%, #FFFFFF 0%, #EDEDED 45%, #A1A1AA 100%);
+    background-size: 200px 200px, 100% 100%;
+    background-blend-mode: overlay, normal;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* ─── ANIMATED BACKGROUND BLOBS ─────────────────────────── */

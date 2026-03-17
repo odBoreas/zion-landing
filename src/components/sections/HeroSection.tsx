@@ -71,19 +71,17 @@ export function HeroSection() {
 
         {/* Glitch headline — data-text must match visible text */}
         <AnimatedReveal delay={0.15}>
-          <div className="noise-text">
-            <h1
-              id="hero-heading"
-              className="glitch text-display text-text-primary"
-              data-text={h.dataText}
-            >
-              {h.line1}
-              <br />
-              <span className="text-accent">{h.line2}</span>
-              <br />
-              <span className="text-text-primary">{h.line3}</span>
-            </h1>
-          </div>
+          <h1
+            id="hero-heading"
+            className="glitch text-display noise-clip-text"
+            data-text={h.dataText}
+          >
+            {h.line1}
+            <br />
+            <span style={{ WebkitTextFillColor: '#00E5FF', color: '#00E5FF' }}>{h.line2}</span>
+            <br />
+            {h.line3}
+          </h1>
         </AnimatedReveal>
 
         <AnimatedReveal delay={0.25}>
