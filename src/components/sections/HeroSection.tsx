@@ -1,66 +1,144 @@
-import dynamic from 'next/dynamic'
-import { ChevronDown, Smartphone, Monitor, Apple } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { DOWNLOAD_URL_IOS, DOWNLOAD_URL_ANDROID, DOWNLOAD_URL_DESKTOP } from '@/lib/constants'
+'use client'
 
-const DataFlowBackground = dynamic(
-  () => import('@/components/ui/DataFlowBackground').then(m => m.DataFlowBackground),
-  { ssr: false }
-)
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ChevronDown, Smartphone, Monitor } from 'lucide-react'
+import { DOWNLOAD_URL_IOS, DOWNLOAD_URL_ANDROID, DOWNLOAD_URL_DESKTOP } from '@/lib/constants'
 
 const AnimatedReveal = dynamic(
   () => import('@/components/ui/AnimatedReveal').then(m => m.AnimatedReveal),
   { ssr: false }
 )
 
+const EASE = [0.23, 1, 0.32, 1] as const
+
 export function HeroSection() {
   return (
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
     >
-      <DataFlowBackground />
+      {/* ── Radial glow — cyan bloom from top ── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[70vh]"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 55% at 50% -5%, rgba(0, 229, 255, 0.13) 0%, rgba(0, 229, 255, 0.04) 40%, transparent 70%)',
+        }}
+      />
 
-      <AnimatedReveal className="flex flex-col items-center gap-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-lime">
-          Anonymous · Encrypted · Instant
-        </p>
+      {/* ── Hairline arc under the glow ── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-0 h-px w-[600px] max-w-full -translate-x-1/2 opacity-30"
+        style={{
+          background: 'linear-gradient(90deg, transparent, #00E5FF, transparent)',
+        }}
+      />
 
-        <h1
-          id="hero-heading"
-          className="max-w-4xl text-text-primary"
-          style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', fontWeight: 800, lineHeight: 1.05 }}
-        >
-          Private.{' '}
-          <span className="text-accent-lime">Instant.</span>{' '}
-          Yours.
-        </h1>
+      {/* ── Content ── */}
+      <div className="relative z-10 flex max-w-5xl flex-col items-center gap-8">
 
-        <p className="max-w-xl text-lg text-text-muted">
-          No sign-up. No phone number. No email. Generate a seed, get your ID, start chatting — in seconds.
-        </p>
+        {/* Eyebrow */}
+        <AnimatedReveal delay={0.05}>
+          <p
+            className="text-[0.65rem] font-semibold uppercase tracking-[0.3em]"
+            style={{ color: '#00E5FF', opacity: 0.7 }}
+          >
+            Anonymous · Encrypted · Instant
+          </p>
+        </AnimatedReveal>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-          <Button href={DOWNLOAD_URL_IOS} variant="primary" aria-label="Download ZION for iOS">
-            <Apple size={16} aria-hidden />
-            App Store
-          </Button>
-          <Button href={DOWNLOAD_URL_ANDROID} variant="ghost" aria-label="Download ZION for Android">
-            <Smartphone size={16} aria-hidden />
-            Google Play
-          </Button>
-          <Button href={DOWNLOAD_URL_DESKTOP} variant="ghost" aria-label="Download ZION for Desktop">
-            <Monitor size={16} aria-hidden />
-            Desktop
-          </Button>
-        </div>
-      </AnimatedReveal>
+        {/* Headline */}
+        <AnimatedReveal delay={0.15}>
+          <h1
+            id="hero-heading"
+            className="text-display text-text-primary"
+          >
+            Private
+            <br />
+            <span style={{ color: '#00E5FF' }}>messaging,</span>
+            <br />
+            <span style={{ opacity: 0.45 }}>without the noise.</span>
+          </h1>
+        </AnimatedReveal>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown size={24} className="text-text-muted" aria-hidden />
+        {/* Subheadline */}
+        <AnimatedReveal delay={0.25}>
+          <p
+            className="max-w-md text-base leading-relaxed"
+            style={{ color: '#555560', letterSpacing: '-0.01em' }}
+          >
+            No account. No phone number. Generate a seed, get an ID, start chatting —{' '}
+            <span style={{ color: '#F0F0F0', opacity: 0.7 }}>in under five seconds.</span>
+          </p>
+        </AnimatedReveal>
+
+        {/* CTAs */}
+        <AnimatedReveal delay={0.35}>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            {/* Primary — iOS (cyan glow) */}
+            <Link
+              href={DOWNLOAD_URL_IOS}
+              aria-label="Download ZION for iOS"
+              className="btn-cyan"
+            >
+              <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor" aria-hidden>
+                <path d="M11.55 8.72c-.02-2.13 1.74-3.16 1.82-3.21-1-1.46-2.55-1.65-3.1-1.67-1.31-.13-2.57.77-3.24.77-.67 0-1.69-.75-2.79-.73C2.65 3.9 1.14 4.83.38 6.27c-1.55 2.69-.4 6.67 1.1 8.85.74 1.07 1.62 2.27 2.77 2.23 1.12-.05 1.54-.72 2.89-.72 1.35 0 1.73.72 2.9.7 1.2-.02 1.96-1.08 2.69-2.16.85-1.24 1.2-2.44 1.22-2.5-.03-.01-2.37-.9-2.4-3.95zm-2.24-7.27C10.01.65 10.66-.33 11.27-1.29a4.37 4.37 0 0 0-1.04-.11c-.99 0-2.07.67-2.74 1.71-.6.93-1.13 2.43-.98 3.86 1.1.08 2.23-.62 2.8-1.72z"/>
+              </svg>
+              App Store
+            </Link>
+
+            {/* Ghost — Android */}
+            <Link
+              href={DOWNLOAD_URL_ANDROID}
+              aria-label="Download ZION for Android"
+              className="btn-ghost"
+            >
+              <Smartphone size={14} aria-hidden />
+              Google Play
+            </Link>
+
+            {/* Ghost — Desktop */}
+            <Link
+              href={DOWNLOAD_URL_DESKTOP}
+              aria-label="Download ZION for Desktop"
+              className="btn-ghost"
+            >
+              <Monitor size={14} aria-hidden />
+              Desktop
+            </Link>
+          </div>
+        </AnimatedReveal>
+
+        {/* Platform label */}
+        <AnimatedReveal delay={0.42}>
+          <p
+            className="text-[0.65rem] uppercase tracking-[0.2em]"
+            style={{ color: '#333340' }}
+          >
+            iOS · Android · macOS · Windows · Linux
+          </p>
+        </AnimatedReveal>
       </div>
+
+      {/* ── Scroll indicator ── */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8, ease: EASE }}
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown size={18} aria-hidden style={{ color: '#333340' }} />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import { Lock, EyeOff, UserX, Zap, Wifi, Code2 } from 'lucide-react'
 import type { LucideProps } from 'lucide-react'
@@ -6,6 +8,10 @@ import { FEATURES } from '@/lib/constants'
 
 const AnimatedReveal = dynamic(
   () => import('@/components/ui/AnimatedReveal').then(m => m.AnimatedReveal),
+  { ssr: false }
+)
+const RevealItem = dynamic(
+  () => import('@/components/ui/AnimatedReveal').then(m => m.RevealItem),
   { ssr: false }
 )
 
@@ -23,30 +29,69 @@ const ICONS: Record<string, IconComponent> = {
 export function FeaturesSection() {
   return (
     <SectionWrapper id="features" aria-labelledby="features-heading">
-      <AnimatedReveal>
-        <h2 id="features-heading" className="section-heading mb-16 text-center">
+
+      {/* Heading */}
+      <AnimatedReveal className="mb-20 text-center">
+        <p
+          className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.3em]"
+          style={{ color: '#00E5FF', opacity: 0.6 }}
+        >
+          Capabilities
+        </p>
+        <h2 id="features-heading" className="text-heading text-text-primary">
           Built different.
         </h2>
       </AnimatedReveal>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {FEATURES.map((feature, i) => {
+      {/* Staggered card grid */}
+      <AnimatedReveal stagger className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {FEATURES.map((feature) => {
           const Icon = ICONS[feature.id]
           return (
-            <AnimatedReveal key={feature.id} delay={i * 0.08}>
-              <div className="card-base flex items-start gap-4">
-                <div className="mt-0.5 flex-shrink-0 text-accent-blue">
-                  <Icon size={20} aria-hidden />
+            <RevealItem key={feature.id}>
+              <div className="glass-card group h-full p-7">
+                {/* Icon */}
+                <div
+                  className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl"
+                  style={{
+                    background: 'rgba(0, 229, 255, 0.06)',
+                    border: '1px solid rgba(0, 229, 255, 0.12)',
+                  }}
+                >
+                  <Icon
+                    size={18}
+                    aria-hidden
+                    style={{ color: '#00E5FF', opacity: 0.85 }}
+                  />
                 </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-text-primary">{feature.title}</h3>
-                  <p className="text-sm text-text-muted">{feature.description}</p>
-                </div>
+
+                {/* Title */}
+                <h3
+                  className="mb-2 text-[0.95rem] font-semibold leading-snug"
+                  style={{ color: '#F0F0F0', letterSpacing: '-0.02em' }}
+                >
+                  {feature.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#555560' }}
+                >
+                  {feature.description}
+                </p>
+
+                {/* Bottom accent line on hover */}
+                <div
+                  aria-hidden="true"
+                  className="mt-6 h-px w-0 transition-all duration-500 group-hover:w-full"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent)' }}
+                />
               </div>
-            </AnimatedReveal>
+            </RevealItem>
           )
         })}
-      </div>
+      </AnimatedReveal>
     </SectionWrapper>
   )
 }
