@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import { LocaleProvider } from '@/lib/locale-context'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 
 const geist = localFont({
   src: './fonts/GeistVF.woff',
@@ -20,17 +22,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={geist.variable}>
       <body className="bg-background text-text-primary antialiased">
-        {/* Global scanline — crawls top→bottom on every page */}
-        <div className="scanline" aria-hidden="true" />
-        {children}
+        <LocaleProvider>
+          <LanguageSwitcher />
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   )

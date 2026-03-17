@@ -1,24 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import { Github, Twitter } from 'lucide-react'
-
-const FOOTER_LINKS = {
-  Product: [
-    { label: 'Download',     href: '#hero' },
-    { label: 'How it Works', href: '#how-it-works' },
-    { label: 'Features',     href: '#features' },
-  ],
-  Community: [
-    { label: 'GitHub',      href: '#' },
-    { label: 'X / Twitter', href: '#' },
-    { label: 'Forum',       href: '#' },
-  ],
-  Legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Use',   href: '#' },
-  ],
-} as const
+import { useLocale } from '@/lib/locale-context'
 
 export function FooterSection() {
+  const { t } = useLocale()
+  const f = t.footer
+
   return (
     <footer
       className="px-6 pb-12 pt-20"
@@ -29,36 +18,29 @@ export function FooterSection() {
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            {/* Wordmark */}
             <span
-              className="text-2xl font-black tracking-[-0.05em]"
-              style={{ color: '#F0F0F0', letterSpacing: '-0.05em' }}
+              className="text-2xl font-black text-text-primary"
+              style={{ letterSpacing: '-0.05em' }}
             >
-              ZION
-              <span style={{ color: '#00E5FF' }}>.</span>
+              ZION<span className="text-accent">.</span>
             </span>
 
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: '#333340' }}
-            >
-              Private by design.
-              <br />
-              Yours by default.
+            <p className="text-sm leading-relaxed text-text-muted">
+              {f.tagline}
             </p>
 
             <div className="flex gap-3 pt-1">
               <Link
                 href="#"
                 aria-label="ZION on GitHub"
-                className="text-text-dim transition-colors duration-300 hover:text-accent"
+                className="text-text-muted transition-colors duration-300 hover:text-accent"
               >
                 <Github size={16} aria-hidden />
               </Link>
               <Link
                 href="#"
                 aria-label="ZION on X / Twitter"
-                className="text-text-dim transition-colors duration-300 hover:text-accent"
+                className="text-text-muted transition-colors duration-300 hover:text-accent"
               >
                 <Twitter size={16} aria-hidden />
               </Link>
@@ -66,10 +48,10 @@ export function FooterSection() {
           </div>
 
           {/* Link groups */}
-          {(Object.entries(FOOTER_LINKS) as [string, readonly { label: string; href: string }[]][]).map(
+          {(Object.entries(f.groups) as [string, readonly { label: string; href: string }[]][]).map(
             ([group, links]) => (
               <div key={group}>
-                <h4 className="mb-5 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-text-dim">
+                <h4 className="mb-5 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-text-muted opacity-50">
                   {group}
                 </h4>
                 <ul className="flex flex-col gap-3">
@@ -94,17 +76,11 @@ export function FooterSection() {
           className="mt-16 flex flex-col items-center justify-between gap-4 pt-8 sm:flex-row"
           style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
         >
-          <p
-            className="text-[0.65rem] uppercase tracking-[0.15em]"
-            style={{ color: '#222228' }}
-          >
-            © 2026 ZION. All rights reserved.
+          <p className="text-[0.65rem] uppercase tracking-[0.15em] text-text-muted opacity-40">
+            {f.copyright}
           </p>
-          <p
-            className="text-[0.65rem] uppercase tracking-[0.15em]"
-            style={{ color: '#222228' }}
-          >
-            End-to-end encrypted · Open protocol
+          <p className="text-[0.65rem] uppercase tracking-[0.15em] text-text-muted opacity-40">
+            {f.protocol}
           </p>
         </div>
       </div>
