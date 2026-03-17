@@ -10,6 +10,7 @@ const geist = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://zion.chat'),
   title: 'ZION — Private Messenger',
   description: 'No sign-up. No tracking. Just chat.',
   openGraph: {
