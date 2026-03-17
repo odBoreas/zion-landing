@@ -28,6 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={geist.variable}>
       <body className="bg-background text-text-primary antialiased">
+        {/* Global scanline — crawls top→bottom on every page */}
+        <div className="scanline" aria-hidden="true" />
         {children}
       </body>
     </html>
