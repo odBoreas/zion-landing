@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { LocaleProvider } from '@/lib/locale-context'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
+import { StaticBlocks } from '@/components/ui/StaticBlocks'
 
 const geist = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div aria-hidden="true" className="atm-glow" style={{ width: '600px', height: '600px', top: '-200px', left: '-200px', background: 'rgba(0,229,255,0.12)' }} />
           <div aria-hidden="true" className="atm-glow" style={{ width: '500px', height: '500px', bottom: '10%', right: '-150px', background: 'rgba(0,229,255,0.09)' }} />
           <div aria-hidden="true" className="atm-glow" style={{ width: '400px', height: '400px', top: '55%', left: '30%', background: 'rgba(0,229,255,0.06)' }} />
+          <StaticBlocks />
           <LanguageSwitcher />
           {children}
         </LocaleProvider>
