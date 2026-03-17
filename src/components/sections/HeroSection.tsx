@@ -39,7 +39,17 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[70vh]"
         style={{
-          background: 'radial-gradient(ellipse 70% 55% at 50% -5%, rgba(0,229,255,0.13) 0%, rgba(0,229,255,0.04) 40%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 55% at 50% -5%, rgba(0,229,255,0.16) 0%, rgba(0,229,255,0.05) 40%, transparent 70%)',
+        }}
+      />
+
+      {/* Slashed background block — clip-path diagonal */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[15%] h-[60vh]"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0,229,255,0.04) 0%, transparent 60%)',
+          clipPath: 'polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)',
         }}
       />
 

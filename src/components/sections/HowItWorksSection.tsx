@@ -20,7 +20,7 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       aria-labelledby="how-heading"
-      className="section-skewed px-6"
+      className="section-skewed section-fade px-6"
     >
       <div className="mx-auto max-w-6xl">
 

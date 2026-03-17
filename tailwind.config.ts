@@ -11,11 +11,11 @@ const config: Config = {
       colors: {
         background:     '#030303',
         surface:        'rgba(255,255,255,0.03)',
-        'border-glass': 'rgba(255,255,255,0.08)',
+        'border-glass': 'rgba(255,255,255,0.10)',
         accent:         '#00E5FF',
-        // ── Only two text shades. No exceptions.
-        'text-primary': '#EDEDED',
-        'text-muted':   '#888888',
+        // ── Two text shades. No dirty grays.
+        'text-primary': '#FFFFFF',
+        'text-muted':   '#A1A1AA',
       },
       fontFamily: {
         sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],

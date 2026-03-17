@@ -8,11 +8,11 @@
   --accent:       #00E5FF;
   --magenta:      #FF00FF;
   --glass-bg:     rgba(255,255,255,0.03);
-  --glass-border: rgba(255,255,255,0.08);
-  --glass-border-hover: rgba(0,229,255,0.25);
-  /* Only two text values. Nothing else. */
-  --text:         #EDEDED;
-  --text-muted:   #888888;
+  --glass-border: rgba(255,255,255,0.10);
+  --glass-border-hover: rgba(0,229,255,0.30);
+  /* Two text values. No dirty grays. */
+  --text:         #FFFFFF;
+  --text-muted:   #A1A1AA;
   --font:         var(--font-geist), system-ui, sans-serif;
 }
 
@@ -30,6 +30,19 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+  }
+
+  /* Noise overlay — fixed, above content, non-interactive */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 300px 300px;
   }
 
   :focus-visible {
@@ -99,7 +112,7 @@
   .btn-ghost {
     display: inline-flex; align-items: center; justify-content: center;
     gap: 0.5rem; padding: 0.875rem 2rem;
-    background: transparent; color: var(--text-muted);
+    background: transparent; color: var(--text);
     font-weight: 600; font-size: 0.875rem; letter-spacing: -0.01em;
     border-radius: 10px; border: 1px solid var(--glass-border); cursor: pointer;
     transition: border-color 0.3s cubic-bezier(0.23,1,0.32,1),
@@ -174,6 +187,21 @@
     clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
     padding-top: 8%;
     padding-bottom: 8%;
+  }
+
+  /* ─── SECTION FADE ───────────────────────────────────────── */
+  .section-fade {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+  }
+
+  /* ─── ATMOSPHERE GLOW ────────────────────────────────────── */
+  .atm-glow {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(120px);
+    z-index: 0;
   }
 
   /* ─── LANGUAGE SWITCHER ──────────────────────────────────── */
