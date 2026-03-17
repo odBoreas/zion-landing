@@ -37,16 +37,7 @@ export function HowItWorksSection() {
         {/* Steps */}
         <AnimatedReveal stagger className="relative grid grid-cols-1 gap-4 md:grid-cols-3">
 
-          {/* Connector — desktop only */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-[16.67%] right-[16.67%] top-[2.75rem] hidden h-px md:block"
-            style={{
-              background: 'linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.15), transparent)',
-            }}
-          />
-
-          {h.steps.map((step) => (
+{h.steps.map((step) => (
             <RevealItem key={step.id}>
               <div className="glass-card flex flex-col items-center gap-4 p-8 text-center">
                 {/* Step number */}

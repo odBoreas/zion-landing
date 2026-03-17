@@ -70,15 +70,14 @@
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
     transition: border-color 0.3s cubic-bezier(0.23,1,0.32,1),
                 box-shadow   0.3s cubic-bezier(0.23,1,0.32,1);
   }
   .glass-card:hover {
     border-color: var(--glass-border-hover);
     box-shadow: 0 12px 50px rgba(0,0,0,0.7),
-                0 0 0 1px rgba(0,229,255,0.08),
-                inset 0 1px 0 rgba(255,255,255,0.08);
+                0 0 0 1px rgba(0,229,255,0.08);
   }
 
   /* ─── BUTTONS ────────────────────────────────────────────── */
@@ -186,13 +185,30 @@
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
   }
 
-  /* ─── ATMOSPHERE GLOW ────────────────────────────────────── */
-  .atm-glow {
-    position: fixed;
+  /* ─── ANIMATED BACKGROUND BLOBS ─────────────────────────── */
+  .bg-blob {
+    position: absolute;
     border-radius: 50%;
-    pointer-events: none;
-    filter: blur(120px);
-    z-index: 0;
+    filter: blur(110px);
+    will-change: transform;
+  }
+  .blob-1 {
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,229,255,0.16) 0%, transparent 70%);
+    top: -20%; left: -18%;
+    animation: blob-drift-1 28s ease-in-out infinite alternate;
+  }
+  .blob-2 {
+    width: 650px; height: 650px;
+    background: radial-gradient(circle, rgba(0,229,255,0.11) 0%, transparent 70%);
+    bottom: -18%; right: -12%;
+    animation: blob-drift-2 34s ease-in-out infinite alternate;
+  }
+  .blob-3 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    top: 38%; left: 32%;
+    animation: blob-drift-3 22s ease-in-out infinite alternate;
   }
 
   /* ─── LANGUAGE SWITCHER ──────────────────────────────────── */
@@ -316,4 +332,17 @@
   88.4% { opacity:0;    height:8px;  }
   89.0% { opacity:0.40; height:4px;  transform:scaleX(1.35) translateX(-9%);  }
   89.8% { opacity:0;    height:4px;  }
+}
+
+@keyframes blob-drift-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(10%, 14%) scale(1.12); }
+}
+@keyframes blob-drift-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-12%, -10%) scale(0.90); }
+}
+@keyframes blob-drift-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-6%, 10%) scale(1.18); }
 }

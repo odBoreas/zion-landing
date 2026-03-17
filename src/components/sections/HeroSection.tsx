@@ -85,9 +85,9 @@ export function HeroSection() {
         </AnimatedReveal>
 
         <AnimatedReveal delay={0.25}>
-          <p className="max-w-md text-base leading-relaxed text-text-primary" style={{ letterSpacing: '-0.01em', opacity: 0.85 }}>
+          <p className="max-w-md text-base leading-relaxed text-text-primary" style={{ letterSpacing: '-0.01em' }}>
             {h.sub}{' '}
-            <span className="text-accent" style={{ opacity: 1 }}>{h.subAccent}</span>
+            <span className="text-accent">{h.subAccent}</span>
           </p>
         </AnimatedReveal>
 
