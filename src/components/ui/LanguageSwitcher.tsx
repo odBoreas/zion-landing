@@ -3,7 +3,7 @@
 import { useLocale } from '@/lib/locale-context'
 import type { Lang } from '@/lib/locales'
 
-const LANGS: Lang[] = ['EN', 'UA']
+const LANGS: Lang[] = ['EN', 'RU']
 
 export function LanguageSwitcher() {
   const { lang, setLang } = useLocale()
