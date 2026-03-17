@@ -3,7 +3,6 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { LocaleProvider } from '@/lib/locale-context'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
-import { StaticBlocks } from '@/components/ui/StaticBlocks'
 import { BackgroundFX } from '@/components/ui/BackgroundFX'
 import { NoiseCanvas } from '@/components/ui/NoiseCanvas'
 
@@ -32,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LocaleProvider>
           {/* Background layer — sits below all content */}
           <BackgroundFX />
-          <StaticBlocks />
           {/* Noise overlay — above everything, overlay blend hits text too */}
           <NoiseCanvas />
           {/* Content layer — explicitly above background */}
