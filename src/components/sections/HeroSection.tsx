@@ -64,7 +64,7 @@ export function HeroSection() {
       <div className="relative z-10 flex max-w-5xl flex-col items-center gap-8">
 
         <AnimatedReveal delay={0.05}>
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-accent opacity-65">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-accent">
             {h.eyebrow}
           </p>
         </AnimatedReveal>
@@ -80,7 +80,7 @@ export function HeroSection() {
             <br />
             <span className="text-accent">{h.line2}</span>
             <br />
-            <span className="text-text-primary opacity-40">{h.line3}</span>
+            <span className="text-text-primary">{h.line3}</span>
           </h1>
         </AnimatedReveal>
 
